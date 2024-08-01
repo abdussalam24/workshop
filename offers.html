@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AW Service Offers</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        /* background-color: rgb(2, 36, 104); */
+        background-color: #2b353f;
+    }
+
+    .top-bar {
+        background-color: black;
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: white;
+    }
+
+    .top-bar a {
+        text-decoration: none;
+        color: #0073e6;
+        font-size: 14px;
+    }
+
+    .contact-info {
+        font-size: 14px;
+    }
+
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        background-color: black;
+        color: #f8f9fa;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo h1 {
+        margin: 0;
+        font-size: 30px;
+        color: white;
+    }
+
+    .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+        margin: 0;
+    }
+
+    .nav-links li {
+        display: inline;
+    }
+
+    .nav-links a {
+        text-decoration: none;
+        color: white;
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    .nav-links a:hover {
+        border-bottom: 2px solid #0073e6;
+        color: #0073e6;
+    }
+
+    .offers {
+        text-align: center;
+        margin: 40px 20px;
+    }
+
+    .offers h1 {
+        font-size: 36px;
+        margin-bottom: 10px;
+        color: white;
+    }
+
+    .offers h2 {
+        font-size: 24px;
+        color: white;
+        margin-bottom: 40px;
+    }
+
+    .card-container {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    .card {
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        overflow: hidden;
+        transition: transform 0.2s;
+    }
+
+    .card:hover {
+        transform: translateY(-10px);
+    }
+
+    .header {
+        background: #007BFF;
+        color: #fff;
+        padding: 20px;
+    }
+
+    .header h3 {
+        margin: 0;
+        font-size: 1.2em;
+    }
+
+    .header h2 {
+        margin: 10px 0 0;
+        font-size: 2em;
+    }
+
+    .details {
+        padding: 20px;
+    }
+
+    .details h4 {
+        margin-top: 0;
+        font-size: 1.5em;
+        color: #007BFF;
+    }
+
+    .details ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .details ul li {
+        padding: 5px 0;
+        border-bottom: 1px solid #f0f0f0;
+        color: #555;
+    }
+
+    .details ul li:last-child {
+        border-bottom: none;
+    }
+
+    button {
+        background: #007BFF;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1em;
+        transition: 0.2s;
+    }
+
+    button:hover {
+        background: #0056b3;
+    }
+
+    /* Enquiry Section */
+
+    .enquiry-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 50px;
+        background-color: #2b353f;
+        color: #f0f0f0;
+        height: calc(100vh - 80px);
+    }
+
+    .form-container {
+        width: 50%;
+    }
+
+    .form-container h2 {
+        font-size: 32px;
+        margin-bottom: 20px;
+        color: #ffffff;
+    }
+
+    .form-group {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        width: 100%;
+        max-width: 48%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        box-sizing: border-box;
+    }
+
+    .form-group textarea {
+        resize: vertical;
+        height: 100px;
+        max-width: 100%;
+    }
+
+    .custom-file-upload {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+        color: #ffffff;
+    }
+
+    .custom-file-upload input {
+        display: none;
+    }
+
+    .custom-file-upload-label {
+        background-color: #005bb5;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .custom-file-upload-label:hover {
+        background-color: #004080;
+    }
+
+    button {
+        background-color: #0073e6;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #005bb5;
+    }
+
+    .image-container {
+        width: 40%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .image-container img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+    }
+
+    .footer-container {
+        background-color: #222;
+        color: #f8f9fa;
+        padding: 50px 20px;
+        font-family: 'Arial', sans-serif;
+    }
+
+    .footer-top {
+        display: flex;
+        justify-content: space-around;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .footer-item {
+        flex: 1;
+        margin: 0 15px;
+    }
+
+    .footer-item i {
+        font-size: 40px;
+        margin-bottom: 10px;
+        color: #0073e6;
+    }
+
+    .footer-item h3 {
+        margin: 10px 0 5px 0;
+        font-size: 22px;
+        color: #f8f9fa;
+    }
+
+    .footer-item p {
+        font-size: 18px;
+        margin: 5px 0;
+    }
+
+    .footer-middle {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 30px;
+        flex-wrap: wrap;
+    }
+
+    .about,
+    .services,
+    .address {
+        flex: 1;
+        margin: 0 20px;
+        max-width: 300px;
+    }
+
+    .about p,
+    .address p {
+        margin: 10px 0;
+        line-height: 1.5;
+        color: #f8f9fa;
+    }
+
+    .services ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .services li {
+        margin: 5px 0;
+    }
+
+    .services a,
+    .address a,
+    .footer-item a {
+        text-decoration: none;
+        color: #0073e6;
+        transition: color 0.3s;
+    }
+
+    .services a:hover,
+    .address a:hover,
+    .footer-item a:hover {
+        color: #005bb5;
+    }
+
+    .footer-bottom {
+        background-color: #111;
+        color: #bbb;
+        padding: 20px 0;
+        text-align: center;
+        border-top: 1px solid #444;
+    }
+
+    .footer-bottom p {
+        margin: 0;
+        font-size: 16px;
+    }
+
+    .footer-bottom a {
+        color: #0073e6;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+    .footer-bottom a:hover {
+        color: #005bb5;
+    }
+
+    .social-icons {
+        margin-top: 10px;
+    }
+
+    .social-icons a {
+        color: #bbb;
+        margin: 0 10px;
+        text-decoration: none;
+        font-size: 24px;
+        transition: color 0.3s;
+    }
+
+    .social-icons a:hover {
+        color: #f8f9fa;
+    }
+
+    @media (max-width: 768px) {
+
+        .footer-top,
+        .footer-middle {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .about,
+        .services,
+        .address {
+            margin: 20px 0;
+            max-width: 100%;
+            text-align: center;
+        }
+
+        .social-icons a {
+            margin: 5px;
+        }
+    }
+</style>
+<header>
+    <div class="top-bar">
+        <a href="#" id="app">Get free appointment with the mechanic →</a>
+        <div class="contact-info">
+            <span>Call us now: <a href="tel:02134919955">(021) 3491 9955</a></span> |
+            <a href="#" id="map">Find us on map →</a>
+        </div>
+    </div>
+    <nav class="navbar">
+        <div class="logo">
+            <h1>Auto Workshop</h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#" id="home">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#">Offers</a></li>
+            <li><a href="#" id="appointment">Appointment</a></li>
+            <li><a href="#" id="about">About</a></li>
+            <li><a href="#" id="contact">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+<div class="offers">
+    <h1>Offers</h1>
+    <h2>Get the best discounts now</h2>
+    <div class="card-container">
+        <div class="card basic">
+            <div class="header">
+                <h3>Combo Offer!</h3>
+                <h2>RS.4200</h2>
+            </div>
+            <div class="details">
+                <h4>Basic</h4>
+                <ul>
+                    <li>Computerized scanning</li>
+                    <li>Throttle body service</li>
+                    <li>Injector cleaning</li>
+                    <li>Spark plugs cleaning and gapping</li>
+                    <li>All filters, oil, coil & leakage inspection</li>
+                    <li>MAP, MAF, O2 or IAT Sensor cleaning</li>
+                    <li>Brakes service</li>
+                </ul>
+                <button onclick="bookAppointment()" class="App">Get Free Appointment Now!</button>
+            </div>
+        </div>
+        <div class="card advanced">
+            <div class="header">
+                <h3>Combo Offer!</h3>
+                <h2>RS.6500</h2>
+            </div>
+            <div class="details">
+                <h4>Advanced</h4>
+                <ul>
+                    <li>Computerized scanning</li>
+                    <li>Throttle body service</li>
+                    <li>Injector cleaning</li>
+                    <li>Spark plugs cleaning and gapping</li>
+                    <li>All filters, oil, coil & leakage inspection</li>
+                    <li>MAP, MAF, O2 or IAT Sensor cleaning</li>
+                    <li>Catalytic converter cleaning</li>
+                    <li>Brakes service</li>
+                </ul>
+                <button onclick="bookAppointment()" class="App">Get Free Appointment Now!</button>
+            </div>
+        </div>
+        <div class="card premium">
+            <div class="header">
+                <h3>Combo Offer!</h3>
+                <h2>RS.9000</h2>
+            </div>
+            <div class="details">
+                <h4>Premium</h4>
+                <ul>
+                    <li>Computerized scanning</li>
+                    <li>Throttle body service</li>
+                    <li>Injector cleaning</li>
+                    <li>Spark plugs cleaning and gapping</li>
+                    <li>All filters, oil, coil & leakage inspection</li>
+                    <li>MAP, MAF, O2 or IAT Sensor cleaning</li>
+                    <li>Catalytic converter cleaning</li>
+                    <li>EGR Cleaning</li>
+                    <li>Brakes service</li>
+                </ul>
+                <button onclick="bookAppointment()" class="App">Get Free Appointment Now!</button>
+            </div>
+        </div>
+        <div class="card advanced">
+            <div class="header">
+                <h3>Combo Offer!</h3>
+                <h2>RS.6500</h2>
+            </div>
+            <div class="details">
+                <h4>Extended</h4>
+                <ul>
+                    <li>Computerized scanning</li>
+                    <li>Throttle body service</li>
+                    <li>Injector cleaning</li>
+                    <li>Spark plugs cleaning and gapping</li>
+                    <li>All filters, oil, coil & leakage inspection</li>
+                    <li>MAP, MAF, O2 or IAT Sensor cleaning</li>
+                    <li>Catalytic converter cleaning</li>
+                    <li>Brakes service</li>
+                    <li>EGR Cleaning</li>
+                    <li>Engine decarbonizing or intake valve cleaning</li>
+                </ul>
+                <button onclick="bookAppointment()" class="App">Get Free Appointment Now!</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="enquiry-section">
+    <div class="form-container">
+        <h2>Quick Enquiry</h2>
+        <form>
+            <div class="form-group">
+                <input type="text" placeholder="Name" required>
+                <input type="text" placeholder="Phone" required>
+                <select type="text" placeholder="Brand" required>
+                    <option value="">Brand</option>
+                    <option value="sedan">Suzuki</option>
+                    <option value="truck">Honda</option>
+                    <option value="suvs">Toyota</option>
+                    <option value="hybrid">Kia</option>
+                </select>
+
+            </div>
+            <div class="form-group">
+                <input type="email" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+                <textarea placeholder="Case Description..." required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="file-upload" class="custom-file-upload">
+                    Attach photo
+                    <input id="file-upload" type="file">
+                </label>
+            </div>
+            <button type="submit">Send →</button>
+        </form>
+    </div>
+    <div class="image-container">
+        <img src="person-fotor-bg-remover-20240525142154.png" alt="Mechanic">
+    </div>
+</section>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-top">
+            <div class="footer-item">
+                <i class="fa fa-envelope"></i>
+                <h3>Get Free</h3>
+                <p>APPOINTMENT</p>
+            </div>
+            <div class="footer-item">
+                <i class="fa fa-phone"></i>
+                <h3>Call Now</h3>
+                <p>0344 2139413</p>
+            </div>
+            <div class="footer-item">
+                <i class="fa fa-tag"></i>
+                <h3>View Our</h3>
+                <p>TOP OFFERS</p>
+            </div>
+        </div>
+        <div class="footer-middle">
+            <div class="about">
+                <h3>About</h3>
+                <p>Auto Workshop is a general automobile repair workshop with an excellent reputation for providing best
+                    quality services. We are based in Karachi, Pakistan...</p>
+                <a href="#" id="read">Read more...</a>
+            </div>
+            <div class="services">
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="#" id="car">Car Wash</a></li>
+                    <li><a href="#" id="oil">Oil change</a></li>
+                    <li><a href="#" id="engine">Engine Service</a></li>
+                    <li><a href="#" id="mechani">Mechanical Service</a></li>
+                </ul>
+            </div>
+            <div class="address">
+                <h3>Address</h3>
+                <p>Shop No. G-12/3 Ground Floor Maymar Square FL-7, Block-14, Gulshan-e-Iqbal, Karachi.</p>
+                <p>Tel: (021) 34919955<br>Cell: 0344 2139413</p>
+                <a href="#" id="map1">Get directions on the map</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2021 Auto Workshop by <a href="#">CreativeWave</a></p>
+            <!-- <div class="social-icons">
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                    <a href="#"><i class="fa fa-linkedin"></i></a>
+                    <a href="#"><i class="fa fa-search"></i></a>
+                </div> -->
+        </div>
+    </div>
+</footer>
+
+
+<script>
+    function bookAppointment() {
+        window.location.href = 'appointment.html';
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+        const links = document.querySelectorAll('.nav-links a[href^="#"]');
+
+        document.getElementById('home').addEventListener('click', function () {
+            window.location.href = 'main.html';  // Navigate to the About page
+        });
+
+        document.getElementById('about').addEventListener('click', function () {
+            window.location.href = 'about.html';  // Navigate to the About page
+        });
+
+        document.getElementById('appointment').addEventListener('click', function () {
+            window.location.href = 'appointment.html';  // Navigate to the About page
+        });
+        document.getElementById('contact').addEventListener('click', function () {
+            window.location.href = 'contact.html';  // Navigate to the About page
+        });
+
+        document.getElementById('appointment').addEventListener('click', function () {
+            window.location.href = 'appointment.html';
+        });
+        document.getElementById('contact').addEventListener('click', function () {
+            window.location.href = 'contact.html';
+        });
+        document.getElementById('map').addEventListener('click', function () {
+            window.location.href = 'contact.html';
+        });
+        document.getElementById('map1').addEventListener('click', function () {
+            window.location.href = 'contact.html';
+        });
+        document.getElementById('read').addEventListener('click', function () {
+            window.location.href = 'about.html';
+        });
+        document.getElementById('car').addEventListener('click', function () {
+            window.location.href = 'Car_wash.html';
+        });
+        document.getElementById('oil').addEventListener('click', function () {
+            window.location.href = 'Oil_change.html';
+        });
+        document.getElementById('engine').addEventListener('click', function () {
+            window.location.href = 'Engine_service.html';
+        });
+        document.getElementById('mechani').addEventListener('click', function () {
+            window.location.href = 'Mechanical_service.html';
+        });
+
+
+    });
+</script>
+
+</body>
+
+</html>

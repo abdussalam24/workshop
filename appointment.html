@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AW Appointment Booking</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #2b353f;
+        }
+
+        .top-bar {
+            background-color: #e8e8e8;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top-bar a {
+            text-decoration: none;
+            color: #0073e6;
+            font-size: 14px;
+        }
+
+        .contact-info {
+            font-size: 14px;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #343a40;
+            color: #f8f9fa;
+        }
+
+        .logo h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links li {
+            display: inline;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+        }
+
+        .nav-links a:hover {
+            border-bottom: 2px solid #0073e6;
+            color: #0073e6;
+        }
+
+        .appointment-container {
+            text-align: center;
+            margin: 5% auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+        }
+
+        .steps {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .step {
+            flex: 1;
+            padding: 10px;
+            border-bottom: 2px solid #ccc;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .step.active {
+            border-bottom: 2px solid #0073e6;
+            color: #0073e6;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        select,
+        input[type="date"],
+        input[type="time"],
+        input[type="text"],
+        input[type="tel"],
+        input[type="email"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 5px 0 15px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #0073e6;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #005bb5;
+        }
+
+        .step-content {
+            display: none;
+        }
+
+        .step-content.active {
+            display: block;
+        }
+
+        @media (max-width: 600px) {
+            .steps {
+                flex-direction: column;
+            }
+
+            .step {
+                text-align: left;
+            }
+
+            select,
+            input[type="date"],
+            input[type="time"],
+            input[type="text"],
+            input[type="tel"],
+            input[type="email"] {
+                width: 100%;
+            }
+        }
+
+        .footer-container {
+            background-color: #222;
+            color: #f8f9fa;
+            padding: 50px 20px;
+            margin-top: 10%;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .footer-item {
+            flex: 1;
+            margin: 0 15px;
+        }
+
+        .footer-item i {
+            font-size: 40px;
+            margin-bottom: 10px;
+            color: #0073e6;
+        }
+
+        .footer-item h3 {
+            margin: 10px 0 5px 0;
+            font-size: 22px;
+            color: #f8f9fa;
+        }
+
+        .footer-item p {
+            font-size: 18px;
+            margin: 5px 0;
+        }
+
+        .footer-middle {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .about,
+        .services,
+        .address {
+            flex: 1;
+            margin: 0 20px;
+            max-width: 300px;
+        }
+
+        .about p,
+        .address p {
+            margin: 10px 0;
+            line-height: 1.5;
+            color: #f8f9fa;
+        }
+
+        .services ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .services li {
+            margin: 5px 0;
+        }
+
+        .services a,
+        .address a,
+        .footer-item a {
+            text-decoration: none;
+            color: #0073e6;
+            transition: color 0.3s;
+        }
+
+        .services a:hover,
+        .address a:hover,
+        .footer-item a:hover {
+            color: #005bb5;
+        }
+
+        .footer-bottom {
+            background-color: #111;
+            color: #bbb;
+            padding: 20px 0;
+            text-align: center;
+            border-top: 1px solid #444;
+        }
+
+        .footer-bottom p {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .footer-bottom a {
+            color: #0073e6;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-bottom a:hover {
+            color: #005bb5;
+        }
+
+        .social-icons {
+            margin-top: 10px;
+        }
+
+        .social-icons a {
+            color: #bbb;
+            margin: 0 10px;
+            text-decoration: none;
+            font-size: 24px;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: #f8f9fa;
+        }
+
+        @media (max-width: 768px) {
+
+            .footer-top,
+            .footer-middle {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .about,
+            .services,
+            .address {
+                margin: 20px 0;
+                max-width: 100%;
+                text-align: center;
+            }
+
+            .social-icons a {
+                margin: 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="top-bar">
+            <a href="#">Get free appointment with the mechanic →</a>
+            <div class="contact-info">
+                <span>Call us now: <a href="tel:02134919955">(021) 3491 9955</a></span> |
+                <a href="#" id="map">Find us on map →</a>
+            </div>
+        </div>
+        <nav class="navbar">
+            <div class="logo">
+                <h1>Auto Workshop</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#" id="home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#" id="offers">Offers</a></li>
+                <li><a href="#" id="appointment">Appointment</a></li>
+                <li><a href="#" id="about">About</a></li>
+                <li><a href="#" id="contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="appointment-container">
+            <h1>Appointment</h1>
+            <p>Welcome to our advanced online appointment booking system</p>
+            <div class="steps">
+                <div class="step active" data-step="1">1. Auto Repair Services</div>
+                <div class="step" data-step="2">2. Your Availability</div>
+                <div class="step" data-step="3">3. Confirmation</div>
+                <div class="step" data-step="4">4. Finish</div>
+            </div>
+            <form id="appointment-form">
+                <div class="step-content active" data-step="1">
+                    <h2>Auto Workshop Offers Free Online Appointment Booking</h2>
+                    <p>Let's book your free appointment.</p>
+                    <div class="form-group">
+                        <label for="services">Our Services</label>
+                        <select id="services" required>
+                            <option value="">Select service</option>
+                            <option value="carWash">Car Wash</option>
+                            <option value="oilChange">Oil Change</option>
+                            <option value="engineService">Engine Service</option>
+                            <option value="tireChange">Tire Change</option>
+                        </select>
+                        <label for="packages">Our Packages</label>
+                        <select id="packages" required>
+                            <option value="">Select package</option>
+                            <option value="package1">Basic(RS:4200)</option>
+                            <option value="package2">Advanced(RS:6500)</option>
+                            <option value="package3">Premium(RS:9000)</option>
+                            <option value="package3">Extended(RS:6500)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="step-content" data-step="2">
+                    <div class="form-group">
+                        <label for="date">I'm available on or after</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="start-time">Start from</label>
+                        <input type="time" id="start-time" name="start-time" required>
+                        <label for="end-time">Finish by</label>
+                        <input type="time" id="end-time" name="end-time" required>
+                    </div>
+                </div>
+                <div class="step-content" data-step="3">
+                    <h2>Confirmation</h2>
+                    <p>Review and confirm your appointment details.</p>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <input type="text" id="address" name="address" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Email">Email</label>
+                        <input type="email" id="Email" name="Email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="carName">Car Name</label>
+                        <input type="text" id="carName" name="carName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="carType">Car Type</label>
+                        <select id="carType" name="carType" required>
+                            <option value="">Select a car type</option>
+                            <option value="sedan">Sedan</option>
+                            <option value="truck">Truck</option>
+                            <option value="suvs">SUVs</option>
+                            <option value="hybrid">Hybrid</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="carNumber">Car Number</label>
+                        <input type="text" id="carNumber" name="carNumber" required>
+                    </div>
+                </div>
+                <div class="step-content" data-step="4">
+                    <h2>Finish</h2>
+                    <p>Thank you! Your booking is complete. An email with details of your booking has been sent to you.
+                    </p>
+                </div>
+                <button type="button" onclick="nextStep()">Next</button>
+            </form>
+        </div>
+
+        <footer>
+            <div class="footer-container">
+                <div class="footer-top">
+                    <div class="footer-item">
+                        <i class="fa fa-envelope"></i>
+                        <h3>Get Free</h3>
+                        <p>APPOINTMENT</p>
+                    </div>
+                    <div class="footer-item">
+                        <i class="fa fa-phone"></i>
+                        <h3>Call Now</h3>
+                        <p>0344 2139413</p>
+                    </div>
+                    <div class="footer-item">
+                        <i class="fa fa-tag"></i>
+                        <h3>View Our</h3>
+                        <p>TOP OFFERS</p>
+                    </div>
+                </div>
+                <div class="footer-middle">
+                    <div class="about">
+                        <h3>About</h3>
+                        <p>Auto Workshop is a general automobile repair workshop with an excellent reputation for
+                            providing best quality services. We are based in Karachi, Pakistan...</p>
+                        <a href="#" id="read">Read more...</a>
+                    </div>
+                    <div class="services">
+                        <h3>Services</h3>
+                        <ul>
+                            <li><a href="#" id="car">Car Wash</a></li>
+                            <li><a href="#" id="oil">Oil change</a></li>
+                            <li><a href="#" id="engine">Engine Service</a></li>
+                            <li><a href="#" id="mechani">Mechanical Service</a></li>
+                        </ul>
+                    </div>
+                    <div class="address">
+                        <h3>Address</h3>
+                        <p>Shop No. G-12/3 Ground Floor Maymar Square FL-7, Block-14, Gulshan-e-Iqbal, Karachi.</p>
+                        <p>Tel: (021) 34919955<br>Cell: 0344 2139413</p>
+                        <a href="#" id="map1">Get directions on the map</a>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>© 2021 Auto Workshop by <a href="#">CreativeWave</a></p>
+                    <!-- <div class="social-icons">
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                    <a href="#"><i class="fa fa-linkedin"></i></a>
+                    <a href="#"><i class="fa fa-search"></i></a>
+                </div> -->
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <script>
+        let currentStep = 1;
+
+        function nextStep() {
+            const totalSteps = document.querySelectorAll('.step').length;
+            const form = document.getElementById('appointment-form');
+            const stepContent = document.querySelector(`.step-content[data-step="${currentStep}"]`);
+
+            // Check if all required fields in the current step are filled
+            const inputs = stepContent.querySelectorAll('input[required], select[required]');
+            let allFilled = true;
+            inputs.forEach(input => {
+                if (!input.value) {
+                    allFilled = false;
+                }
+            });
+
+            if (!allFilled) {
+                alert('Please fill all required fields.');
+                return;
+            }
+
+            if (currentStep < totalSteps) {
+                document.querySelector(`.step[data-step="${currentStep}"]`).classList.remove('active');
+                document.querySelector(`.step-content[data-step="${currentStep}"]`).classList.remove('active');
+                currentStep++;
+                document.querySelector(`.step[data-step="${currentStep}"]`).classList.add('active');
+                document.querySelector(`.step-content[data-step="${currentStep}"]`).classList.add('active');
+            } else {
+                form.submit();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const links = document.querySelectorAll('.nav-links a[href^="#"]');
+            document.getElementById('read').addEventListener('click', function () {
+                window.location.href = 'about.html';
+            });
+            document.getElementById('home').addEventListener('click', function () {
+                window.location.href = 'main.html';
+            });
+            document.getElementById('about').addEventListener('click', function () {
+                window.location.href = 'about.html';  // Navigate to the About page
+            });
+            document.getElementById('offers').addEventListener('click', function () {
+                window.location.href = 'offers.html';  // Navigate to the About page
+            });
+            document.getElementById('contact').addEventListener('click', function () {
+                window.location.href = 'contact.html';  // Navigate to the About page
+            });
+            document.getElementById('appointment').addEventListener('click', function () {
+                window.location.href = 'appointment.html';
+            });
+            document.getElementById('contact').addEventListener('click', function () {
+                window.location.href = 'contact.html';
+            });
+            document.getElementById('map').addEventListener('click', function () {
+                window.location.href = 'contact.html';
+            });
+            document.getElementById('map1').addEventListener('click', function () {
+                window.location.href = 'contact.html';
+            });
+            document.getElementById('car').addEventListener('click', function () {
+                window.location.href = 'Car_wash.html';
+            });
+            document.getElementById('oil').addEventListener('click', function () {
+                window.location.href = 'Oil_change.html';
+            });
+            document.getElementById('engine').addEventListener('click', function () {
+                window.location.href = 'Engine_service.html';
+            });
+            document.getElementById('mechani').addEventListener('click', function () {
+                window.location.href = 'Mechanical_service.html';
+            });
+
+
+        });
+
+
+    </script>
+</body>
+
+</html>
